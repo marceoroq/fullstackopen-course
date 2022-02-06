@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-const Button = ({handleClick, text}) => {
-  return <button onClick={handleClick}>{text}</button>
+const Button = ({ handleClick, text }) => {
+  return <button onClick={handleClick}>{text}</button>;
 }
 
-const Statistics = ({good, neutral, bad}) => {
+const Statistics = ({ good, neutral, bad }) => {
   const sum = good + neutral + bad;
   if (sum === 0) {
-    return "No feedback given"
+    return "No feedback given";
   } else {
     return (
       <table>
@@ -27,9 +27,9 @@ const Statistics = ({good, neutral, bad}) => {
 
 const App = () => {
   // save clicks of each button to its own state
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
 
   return (
     <div>
@@ -45,4 +45,4 @@ const App = () => {
 
 ReactDOM.render(<App />, 
   document.getElementById('root')
-)
+);

@@ -1,12 +1,36 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 
 const App = (props) => {
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(Array(anecdotes.length).fill(0));
+  const [mostVotes, setMostVotes] = useState({selected: 0, votes: 0});
+
+  useEffect(() => {
+    if (votes[selected] > mostVotes.votes) {
+      setMostVotes({...mostVotes, selected, votes: votes[selected]});
+    }
+  }, [votes]);
+
+  const handleNextClick = () => {
+    const arrayPosition = Math.floor(Math.random() * anecdotes.length);
+    setSelected(arrayPosition);
+  }
+
+  const handleVoteClick = () => {
+    const copyVotes = [...votes];
+    copyVotes[selected]++;
+    setVotes(copyVotes);
+  }
 
   return (
     <div>
-      {props.anecdotes[selected]}
+      <p>"{props.anecdotes[selected]}"</p>
+      <p>has {votes[selected]} votes</p>
+      <button onClick={handleVoteClick}>Vote</button>
+      <button onClick={handleNextClick}>Next Anecdote</button>
+      <h1>Anecdote with most votes</h1>
+      <p>"{props.anecdotes[mostVotes.selected]}"</p>
     </div>
   )
 }
